@@ -1,35 +1,51 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link, Redirect, Tabs } from 'expo-router';
+import { Pressable, useColorScheme } from 'react-native';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {Colors} from '@/constants/Colors';
+import { useAuth } from '@/providers/AuthProvider';
+
+/**
+ * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+ */
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome>['name'];
+  color: string;
+}) {
+  return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
+}
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { session } = useAuth();
+
+  if (!session) {
+    return <Redirect href={'/'} />;
+  }
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+        tabBarActiveTintColor: Colors.Beak_Upper,
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="courses"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          title: 'courses',
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="cutlery" color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="profile"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          title: 'Profile',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </Tabs>
