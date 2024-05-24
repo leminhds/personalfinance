@@ -30,7 +30,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="courses"
+        name="index"
         options={{
           title: 'courses',
           headerShown: false,

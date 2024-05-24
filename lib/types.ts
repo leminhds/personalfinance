@@ -1,22 +1,22 @@
 import { Database } from '@/database.types' // Adjust the import path as needed
 
 // Define types for the individual components
-type Flashcard = {
+export type Flashcard = {
   id: string
   term: string
 }
 
-type QuizQuestion = {
+export type QuizQuestion = {
   id: string
   question: string
 }
 
-type PracticalExercise = {
+export type PracticalExercise = {
   id: string
   description: string
 }
 
-type CaseStudy = {
+export type CaseStudy = {
   id: string
   question: string
 }
@@ -35,4 +35,5 @@ export type ModuleWithDetail = {
   title: string
   lessons: Lesson[]
 }
+export type ExerciseType = 'Flashcards' | 'Quiz' | 'Case Studies' | 'Practical Exercises';
 

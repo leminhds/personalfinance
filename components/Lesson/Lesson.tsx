@@ -4,22 +4,22 @@ import { Database } from '@/database.types'
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
-import styles from "./Exercise.styles";
+import styles from "./Lesson.styles";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { useNavigation } from "@react-navigation/native";
 import { Lesson } from "@/lib/types";
-const Exercise = ({ exercise }: { exercise: Lesson } ) => {
+const LessonItem = ({ lesson }: { lesson: Lesson } ) => {
   const navigation = useNavigation();
   // const url =
   //   "https://raw.githubusercontent.com/abdulkadir-erdeger/duolingo-clone/master/assets/Icons/" +
   //   exercise.definition.picture;
 
   return (
-    exercise && (
+    lesson && (
       <TouchableOpacity
         onPress={() =>
-          // navigation.navigate("exercisePage", (exercise = exercise))
-          console.log("exercise", exercise)
+          navigation.navigate("lessonPage", { lesson: lesson })
+          // console.log("exercise", lesson)
         }
         style={styles.innerButton}
       >
@@ -41,18 +41,19 @@ const Exercise = ({ exercise }: { exercise: Lesson } ) => {
             >
               <Image
                 style={styles.innerLogo}
-                // source={{
-                //   uri: url,
-                // }}
+                source={{
+                  // uri: url,
+                  uri: "https://raw.githubusercontent.com/abdulkadir-erdeger/duolingo-clone/master/assets/Icons/basics.png"
+                }}
                 resizeMode="cover"
               />
             </View>
           )}
         </AnimatedCircularProgress>
-        <Text style={styles.innerText}>{exercise.title}</Text>
+        <Text style={styles.innerText}>{lesson.title}</Text>
       </TouchableOpacity>
     )
   );
 };
 
-export default Exercise;
+export default LessonItem;

@@ -1,34 +1,32 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { Colors } from "@/constants/Colors";
 
-var width = Dimensions.get("window").width;
-var height = Dimensions.get("window").height;
+const { width, height } = Dimensions.get("window");
 
-export default StyleSheet.create({
-  innerCircle: {
-    opacity: 0.8,
-    borderRadius: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 120 * 0.75, // 90px
-    width: 120 * 0.75, // 90px
-  },
-  innerLogo: {
-    width: 50,
-    height: 50,
-  },
+const styles = StyleSheet.create({
   innerButton: {
-    alignItems: "center",
-    margin: 5,
+    alignItems: 'center',
+    margin: 10,
   },
-  innerText: { fontFamily: "Nunito_Black", fontSize: 18, marginTop: 5 },
-  body: {
-    flex: 1,
-    padding: 20,
-  },
-  unitLogo: {
+  innerCircle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 60,
+    width: 120,
     height: 120,
-    width: 200,
-    marginBottom: 15,
+  },
+  innerCircleText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.White,
+    textAlign: 'center',
+  },
+  innerText: {
+    marginTop: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.DarkGray,
   },
 });
+
+export default styles;

@@ -52,3 +52,4 @@ Join our community of developers creating universal apps.
 
 Create type from supabase:
 npx supabase gen types typescript --project-id hudxyhidxwmhjyscnpxh > database.types.ts 
+ESA: eas build --platform android --profile development
