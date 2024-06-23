@@ -4,11 +4,13 @@ import Button from '@/components/Button';
 import { Colors } from '@/constants/Colors';
 import { Link, Stack } from 'expo-router';
 import { supabase } from '@/lib/supabase';
-
+import useGlobalContext from '@/context/GlobalProvider';
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // const { setUser, setIsLogged } = useGlobalContext();
 
   async function signInWithEmail() {
     setLoading(true);

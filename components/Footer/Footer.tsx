@@ -36,10 +36,8 @@ const Footer = ({ correctAnswer, checking }) => {
       }
     }
     if (status) {
-      // console.log("doğru :", wordArrayList);
       setCheckStatus(true);
     } else {
-      //console.log("yanlış :", wordArrayList);
       setCheckStatus(false);
     }
   };

@@ -14,13 +14,14 @@ import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { getModulesWithDetails } from "@/lib/queries";
-import { ModuleWithDetail, Lesson } from "@/lib/types";
+import { ModuleWithDetail, LessonWithDetail } from "@/lib/types";
 import { Colors } from "@/constants/Colors";
 
 const Courses = () => {
   const navigation = useNavigation();
+  
   const [modules, setModules] = useState<ModuleWithDetail[]>([]);
-
+  console.log("modules", modules);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -87,7 +88,7 @@ const renderModule = ({ item }: { item: ModuleWithDetail }) => {
   );
 };
 
-const renderLesson = ({ item }: { item: Lesson }) => {
+const renderLesson = ({ item }: { item: LessonWithDetail }) => {
   return <LessonItem lesson={item} />;
 };
 
