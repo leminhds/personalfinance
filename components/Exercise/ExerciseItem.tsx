@@ -4,6 +4,7 @@ import { Link } from 'expo-router';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Colors } from '@/constants/Colors';
 import { ExerciseType } from '@/lib/types'; // Adjust the import path to your types
+import styles from './ExerciseItem.styles';
 
 interface ExerciseItemProps {
   type: ExerciseType;
@@ -55,29 +56,5 @@ const ExerciseItem: React.FC<ExerciseItemProps> = ({ type, lessonId }) => {
     </Link>
   );
 };
-
-const styles = StyleSheet.create({
-  innerButton: {
-    margin: 10,
-    alignItems: 'center',
-  },
-  innerCircle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 60,
-    width: 100,
-    height: 100,
-  },
-  innerCircleText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  innerText: {
-    marginTop: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
 
 export default ExerciseItem;

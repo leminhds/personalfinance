@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import styles from "./Word.styles";
 
-const Word = ({ word }) => (
+const Word = ({ word }: { word: string }) => (
   <View style={styles.root}>
     <View>
       <View style={styles.container2}>

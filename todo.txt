@@ -1,0 +1,1 @@
+create exercise table: exercise_id, lesson_id, exercise_type

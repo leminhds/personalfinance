@@ -94,52 +94,28 @@ export const getAvailableLessonItemsByLessonId = async (lessonId: string) => {
       throw new Error(`Error fetching lesson ${lessonId}: ${lessonError.message}`);
     }
 
-    // Check for flashcards
-    const { count: flashcardsCount, error: flashcardsError } = await supabase
-      .from('flashcards')
-      .select('id', { count: 'exact' })
+    // Check for available exercise items by lesson_id and lesson_type
+    const { data: exerciseItems, error: exerciseItemsError } = await supabase
+      .from('exercise_items')
+      .select('lesson_type')
       .eq('lesson_id', lesson.id);
 
-    if (flashcardsError) {
-      throw new Error(`Error fetching flashcards for lesson ${lesson.id}: ${flashcardsError.message}`);
+    if (exerciseItemsError) {
+      throw new Error(`Error fetching exercise items for lesson ${lesson.id}: ${exerciseItemsError.message}`);
     }
 
-    // Check for quiz questions
-    const { count: quizQuestionsCount, error: quizQuestionsError } = await supabase
-      .from('quiz_questions')
-      .select('id', { count: 'exact' })
-      .eq('lesson_id', lesson.id);
-
-    if (quizQuestionsError) {
-      throw new Error(`Error fetching quiz questions for lesson ${lesson.id}: ${quizQuestionsError.message}`);
-    }
-
-    // Check for practical exercises
-    const { count: practicalExercisesCount, error: practicalExercisesError } = await supabase
-      .from('practical_exercises')
-      .select('id', { count: 'exact' })
-      .eq('lesson_id', lesson.id);
-
-    if (practicalExercisesError) {
-      throw new Error(`Error fetching practical exercises for lesson ${lesson.id}: ${practicalExercisesError.message}`);
-    }
-
-    // Check for case studies
-    const { count: caseStudiesCount, error: caseStudiesError } = await supabase
-      .from('case_studies')
-      .select('id', { count: 'exact' })
-      .eq('lesson_id', lesson.id);
-
-    if (caseStudiesError) {
-      throw new Error(`Error fetching case studies for lesson ${lesson.id}: ${caseStudiesError.message}`);
-    }
+    // Determine the availability of each exercise type
+    const hasFlashcards = exerciseItems.some(item => item.lesson_type === 'flashcard');
+    const hasQuizQuestions = exerciseItems.some(item => item.lesson_type === 'quiz_question');
+    const hasPracticalExercises = exerciseItems.some(item => item.lesson_type === 'practical_exercise');
+    const hasCaseStudies = exerciseItems.some(item => item.lesson_type === 'case_study');
 
     return {
       ...lesson,
-      flashcards: (flashcardsCount ?? 0) > 0,
-      quizQuestions: (quizQuestionsCount ?? 0) > 0,
-      practicalExercises: (practicalExercisesCount ?? 0) > 0,
-      caseStudies: (caseStudiesCount ?? 0) > 0,
+      flashcards: hasFlashcards,
+      quizQuestions: hasQuizQuestions,
+      practicalExercises: hasPracticalExercises,
+      caseStudies: hasCaseStudies,
     };
   } catch (error) {
     console.error('Error fetching lesson details:', error);

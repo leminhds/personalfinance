@@ -40,13 +40,6 @@ const LessonPage: React.FC = () => {
     fetchData();
   }, []);
 
-  if (!lessonDetails){
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text>Loading...</Text>
-      </SafeAreaView>
-    )
-  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -55,10 +48,10 @@ const LessonPage: React.FC = () => {
   }, [navigation]);
 
   const exercises = [
-    { type: 'Flashcards' as ExerciseType, available: lessonDetails.flashcards },
-    { type: 'Quiz' as ExerciseType, available: lessonDetails.quizQuestions },
-    { type: 'Case Studies' as ExerciseType, available: lessonDetails.caseStudies },
-    { type: 'Practical Exercises' as ExerciseType, available: lessonDetails.practicalExercises },
+    { type: 'Flashcards' as ExerciseType, available: lessonDetails?.flashcards },
+    { type: 'Quiz' as ExerciseType, available: lessonDetails?.quizQuestions },
+    { type: 'Case Studies' as ExerciseType, available: lessonDetails?.caseStudies },
+    { type: 'Practical Exercises' as ExerciseType, available: lessonDetails?.practicalExercises },
   ];
 
   return (
